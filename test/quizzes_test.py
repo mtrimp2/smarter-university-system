@@ -10,10 +10,20 @@ class QuizzesTest(unittest.TestCase):
         
     def test_expose_failure_01(self):
         """
-        Implement this function and two more that
-        execute the code and make it fail.
+        Test retrieval of a quiz that does not exist 
+        This unit test will fail at file controller.py, line 117 
         """
-        self.assertTrue(True, 'Example assertion.')
+        self.ctrl.clear_data()
+
+        # Check that we have no quizzes in the list
+        quizzes = self.ctrl.get_quizzes()
+        self.assertEquals(len(quizzes), 0, "There are no quizzes in the list.")
+
+        # Try to retrieve quiz with incorrect id 
+        quiz = self.ctrl.get_quiz_by_id("random quiz id") #arbitrary string
+
+        self.assertIsNotNone(quiz, "The quiz can be retrieved.")
+        # This unit test should fail at file quizzes_controller.py, line 117 (?)
         
 
 if __name__ == '__main__':
