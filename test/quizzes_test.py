@@ -26,14 +26,15 @@ class QuizzesTest(unittest.TestCase):
         # This unit test should fail at file quizzes_controller.py, line 117 (?)
 
     def test_expose_failure_02(self):
-        
         self.ctrl.clear_data()
 
-        # add quiz
+        # add quiz 
         quiz_id = self.ctrl.add_quiz("New quiz","New quiz",datetime.datetime.now(),datetime.datetime.now()+ datetime.timedelta(minutes=75))
+        # quiz added successfully
         
         # add question
         question_id = self.ctrl.add_question(quiz_id,datetime.datetime.now(),"quiz question")
+        # Here it will cause an error as datetime object has been passed to function which requires a string. This will cause the function to crash
 
         # Failing at 
         """
