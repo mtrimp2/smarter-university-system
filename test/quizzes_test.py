@@ -24,6 +24,29 @@ class QuizzesTest(unittest.TestCase):
 
         self.assertIsNotNone(quiz, "The quiz can be retrieved.")
         # This unit test should fail at file quizzes_controller.py, line 117 (?)
+
+    def test_expose_failure_02(self):
+        
+        self.ctrl.clear_data()
+
+        # add quiz
+        quiz_id = self.ctrl.add_quiz("New quiz","New quiz",datetime.datetime.now(),datetime.datetime.now()+ datetime.timedelta(minutes=75))
+        
+        # add question
+        question_id = self.ctrl.add_question(quiz_id,datetime.datetime.now(),"quiz question")
+
+        # Failing at 
+        """
+        File "d:\Fall 23\Software Engineering\smarter-university-system\app\controllers\quizzes_controller.py", line 81, in add_question
+        self._save_data()
+        ---
+        File "d:\Fall 23\Software Engineering\smarter-university-system\app\controllers\quizzes_controller.py", line 55, in _save_data
+        save_data(self.file_name,json_data)
+        """
+        # get question by id
+        question = self.ctrl.get_question_by_id(question_id)
+
+        self.assertIsNotNone(question,"Question")
         
 
 if __name__ == '__main__':
