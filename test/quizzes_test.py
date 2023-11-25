@@ -6,13 +6,14 @@ class QuizzesTest(unittest.TestCase):
 
     def setUp(self):
         # Run tests on non-production data
+
         self.ctrl = QuizzesController('quizzes_test.py')
+
     
-    def test_expose_failure_01(self):
+    def test_expose_failure_01(self):#Maggie's code
  
         """
         Test use of integer 1 instead of boolean value in add_answer
-        This unit test will fail at file controller.py, line 117 
         """
         self.ctrl.clear_data()
 
@@ -37,7 +38,28 @@ class QuizzesTest(unittest.TestCase):
         self.assertIsNotNone(test_quiz_id, "The quiz can be retrieved.")
         #self.ctrl.clear_data()    
 
-    def test_expose_failure_02(self):
+    
+    def test_expose_failure_02(self):#Joshua and Shwe's code
+        """  
+        Fails to create a quiz, since the title parameter is None, expecting a string 
+        """
+        
+        #Deletes contents in assignment.json
+        self.ctrl.clear_data()
+
+        #Add a sample quiz to assignment.json files  
+        test_quiz_id = self.ctrl.add_quiz(None,"Math quiz 1",datetime.datetime(2020, 5, 17),datetime.datetime(2020, 5, 18))
+        
+        """
+        File "/home/arup/Documents/Enpm611/smarter-university-system-maggie_branch/app/controllers/quizzes_controller.py", line 63
+        """
+        # Try to retrieve recently incorrectly created quiz 
+        self.assertIsNotNone(test_quiz_id , "The test answer should not be retrievable")
+        
+        #Deletes contents in assignment.json
+        self.ctrl.clear_data()
+
+def test_expose_failure_03(self):#Harsh's unit test
         self.ctrl.clear_data()
 
         # add quiz 
@@ -60,28 +82,6 @@ class QuizzesTest(unittest.TestCase):
         question = self.ctrl.get_question_by_id(question_id)
 
         self.assertIsNotNone(question,"Question")
-
-    def test_expose_failure_03(self):
-        """  
-        Fails to create a quiz, since the title parameter is None, expecting a string 
-        """
-        
-        #Deletes contents in assignment.json
-        self.ctrl.clear_data()
-
-        #Add a sample quiz to assignment.json files  
-        test_quiz_id = self.ctrl.add_quiz(None,"Math quiz 1",datetime.datetime(2020, 5, 17),datetime.datetime(2020, 5, 18))
-        
-        """
-        File "/home/arup/Documents/Enpm611/smarter-university-system-maggie_branch/app/controllers/quizzes_controller.py", line 63
-        """
-        # Try to retrieve recently incorrectly created quiz 
-        self.assertIsNotNone(test_quiz_id , "The test answer should not be retrievable")
-        
-        #Deletes contents in assignment.json
-        self.ctrl.clear_data()
-        
-        
-        
+     
 if __name__ == '__main__':
     unittest.main()
