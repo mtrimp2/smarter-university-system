@@ -6,13 +6,12 @@ class QuizzesTest(unittest.TestCase):
 
     def setUp(self):
         # Run tests on non-production data
-        self.ctrl = QuizzesController('assignment.json')
+        self.ctrl = QuizzesController('assignments.json')
     
     def test_expose_failure_01(self):
  
         """
         Test use of integer 1 instead of boolean value in add_answer
-        This unit test will fail at file controller.py, line 117 
         """
         self.ctrl.clear_data()
 
