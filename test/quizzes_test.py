@@ -11,20 +11,31 @@ class QuizzesTest(unittest.TestCase):
         
     def test_expose_failure_01(self):
         """
-        Test retrieval of a quiz that does not exist 
+        Test use of integer 1 instead of boolean value in add_answer
         This unit test will fail at file controller.py, line 117 
         """
         self.ctrl.clear_data()
 
-        # Check that we have no quizzes in the list
-        quizzes = self.ctrl.get_quizzes()
-        self.assertEquals(len(quizzes), 0, "There are no quizzes in the list.")
+        #Check add files a sample quiz and receive its ID 
+        test_quiz_id = self.ctrl.add_quiz('quiz 1','True or false?',datetime(2020, 5, 18),datetime(2020, 5, 19))
+        
+        # Add question
+        self.ctrl.add_question(test_quiz_id, "Question 1", "The sky is blue")
+        # quiz_id:str, title:str, text:str
 
-        # Try to retrieve quiz with incorrect id 
-        quiz = self.ctrl.get_quiz_by_id("random quiz id") #arbitrary string
+        # Add answer
+        self.ctrl.add_answer(test_quiz_id, "true", 1)
+        # question_id:str, text:str, is_correct:bool
 
-        self.assertIsNotNone(quiz, "The quiz can be retrieved.")
-        # This unit test should fail at file quizzes_controller.py, line 117 (?)
+        """ 
+        File "/Users/maggietrimpin/Documents/repos/smarter-university-system/app/controllers/quizzes_controller.py", line 19, in __init__
+            self.quizzes:List[Quiz] = self._load_data()
+                              ^^^^^^^^^^^^^^^^^
+        File "/Users/maggietrimpin/Documents/repos/smarter-university-system/app/controllers/quizzes_controller.py", line 27, in _load_data
+            for qobj in load_data(self.file_name):
+        """
+        self.assertIsNotNone(test_quiz_id, "The quiz can be retrieved.")
+        #self.ctrl.clear_data()    
 
     def test_expose_failure_02(self):
         self.ctrl.clear_data()
