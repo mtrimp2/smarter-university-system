@@ -79,4 +79,4 @@ Instead, the method is called as \
 Since datetime object datetime.datetime.now() is used in place of a string, the test crashes, with error message\
 `./quizzes_test.py::QuizzesTest::test_expose_failure_03 Failed with Error: Object of type datetime is not JSON serializable`
 
-NOTE: Upon each execution of unit test 3, the json file must be manually changed to "[]." This must be done each time if the user wants to execute any other unit tests afterwards. Unit test 3 erases the json file. 
+**NOTE: Upon each execution of unit test 3, the json file must be manually changed to "[]." This must be done each time if the user wants to execute any other unit tests afterwards. Unit test 3 erases the json file.** 
