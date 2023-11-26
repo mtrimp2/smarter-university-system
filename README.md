@@ -37,3 +37,46 @@ This repository already configures the tests to successfully run in VSCode. Afte
 For more information about running tests in VSCode, see:
 
 https://code.visualstudio.com/docs/python/testing
+
+## Quizzes_Test.py Test Cases
+
+Three unit tests have been created by team two as part of the ENPM611 term project. python 3.10 was used for each of the tests. 
+
+### Test 1
+The first unit test is meant to test the use of an integer value instead of boolean value in the add_answer method. 
+
+The intended method call is \
+`add_answer(self, question_id:str, text:str, is_correct:bool)`\
+Instead, the method is called as \
+`self.ctrl.add_answer(test_quiz_id, "true", 1)`
+
+Since integer value 1 is used in place of a boolean, the test crashes, with error message
+
+`./quizzes_test.py::QuizzesTest::test_expose_failure_01 Failed with Error: 'NoneType' object is not iterable`
+
+
+### Test 2
+The second unit test is meant to test the use of parameter None instead of string in the add_quiz method. 
+
+The intended method call is \
+`add_quiz(self, title:str, text:str, available_date:datetime, due_date:datetime)`\
+Instead, the method is called as\
+`self.ctrl.add_quiz(None,"Math quiz 1",datetime.datetime(2020, 5, 17),datetime.datetime(2020, 5, 18))`
+
+This call fails to create a quiz, since the title parameter is None, rather than the expected string.
+The test crashes, with error message
+
+`./quizzes_test.py::QuizzesTest::test_expose_failure_02 Failed with Error: unsupported operand type(s) for +: 'NoneType' and 'str'`
+
+### Test 3
+The third unit test is meant to test the addition of a question to a quiz, using a datetime object as input rather than a string.
+
+The intended method call is \
+`add_question(self, quiz_id:str, title:str, text:str)`\
+Instead, the method is called as \
+`self.ctrl.add_question(quiz_id,datetime.datetime.now(),"quiz question")`
+
+Since datetime object datetime.datetime.now() is used in place of a string, the test crashes, with error message\
+`./quizzes_test.py::QuizzesTest::test_expose_failure_03 Failed with Error: Object of type datetime is not JSON serializable`
+
+NOTE: Upon each execution of unit test 3, the json file must be manually changed to "[]." This must be done each time if the user wants to execute any other unit tests afterwards. Unit test 3 erases the json file. 
