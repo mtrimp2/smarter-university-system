@@ -43,17 +43,15 @@ https://code.visualstudio.com/docs/python/testing
 Three unit tests have been created by team two as part of the ENPM611 term project. python 3.10 was used for each of the tests. 
 
 ### Test 1
-The first unit test is meant to test the use of an integer value instead of boolean value in the add_answer method. 
+The first unit test is meant to test the use of a None value as an iterable. 
 
-The intended method call is \
-`add_answer(self, question_id:str, text:str, is_correct:bool)`\
-Instead, the method is called as \
-`self.ctrl.add_answer(test_quiz_id, "true", 1)`
+The incorrect method call is \
+`self.ctrl.quizzes[0].sections = None`\
+Whereas the quizzes[0] array should be populated with Quiz objects.
 
-Since integer value 1 is used in place of a boolean, the test crashes, with error message
+The test crashes, with error message
 
 `./quizzes_test.py::QuizzesTest::test_expose_failure_01 Failed with Error: 'NoneType' object is not iterable`
-
 
 ### Test 2
 The second unit test is meant to test the use of parameter None instead of string in the add_quiz method. 
